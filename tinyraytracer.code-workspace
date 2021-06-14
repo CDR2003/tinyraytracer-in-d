@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"dscanner.ignoredKeys": [
+			"dscanner.style.undocumented_declaration"
+		]
+	}
+}

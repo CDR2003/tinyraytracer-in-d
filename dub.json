@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Fitbos"
+	],
+	"copyright": "Copyright © 2021, Fitbos",
+	"description": "A minimal D application.",
+	"license": "MIT",
+	"name": "tinyraytracer"
+}

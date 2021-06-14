@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/tinyraytracer
+tinyraytracer.so
+tinyraytracer.dylib
+tinyraytracer.dll
+tinyraytracer.a
+tinyraytracer.lib
+tinyraytracer-test-*
+*.exe
+*.o
+*.obj
+*.lst
+out.ppm
