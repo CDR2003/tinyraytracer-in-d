@@ -3,37 +3,31 @@ import std.algorithm;
 import std.conv;
 import gml.vector;
 
-void render()
+void main()
 {
-	immutable int width = 1024;
-	immutable int height = 768;
-	auto framebuffer = new Vector3[width * height];
+	immutable int width = 256;
+	immutable int height = 256;
 
-	for (int y = 0; y < height; y++)
+	auto file = File("../out.ppm", "w");
+	scope(exit) file.close();
+
+	file.writeln("P3");
+	file.writefln("%d %d", width, height);
+	file.writeln("255");
+
+	for (int y = height - 1; y >= 0; --y)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			auto index = y * width + x;
-			framebuffer[index] = Vector3(y / float(height), x / float(width), 0);
+			auto r = cast(double)x / (width - 1);
+			auto g = cast(double)y / (height - 1);
+			auto b = 0.25;
+
+			auto ir = cast(int)(r * 255.999);
+			auto ig = cast(int)(g * 255.999);
+			auto ib = cast(int)(b * 255.999);
+
+			file.writefln("%d %d %d", ir, ig, ib);
 		}
 	}
-
-	auto file = File("../out.ppm", "wb");
-	scope(exit) file.close();
-
-	file.write("P6\n" ~ to!string(width) ~ " " ~ to!string(height) ~ "\n255\n");
-	for (int i = 0; i < width * height; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
-			immutable float component = max(0f, min(1f, framebuffer[i][j]));
-			immutable char ch = to!char(255 * component);
-			file.write(ch);
-		}
-	}
-}
-
-void main()
-{
-	render();
 }
