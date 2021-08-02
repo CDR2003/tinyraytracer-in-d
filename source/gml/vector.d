@@ -556,6 +556,8 @@ alias Vector3 = vec3!float;  ///
 alias Vector4Int = vec4!int;  ///
 alias Vector4 = vec4!float;  ///
 
+alias Color = vec3!float;
+
 private
 {
     static string generateLoopCode(string formatString, int N)() pure nothrow

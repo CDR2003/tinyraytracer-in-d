@@ -1,33 +1,28 @@
 import std.stdio;
 import std.algorithm;
 import std.conv;
-import gml.vector;
+import std.process;
+
+import gml;
 
 void main()
 {
 	immutable int width = 256;
 	immutable int height = 256;
 
-	auto file = File("../out.ppm", "w");
-	scope(exit) file.close();
-
-	file.writeln("P3");
-	file.writefln("%d %d", width, height);
-	file.writeln("255");
-
-	for (int y = height - 1; y >= 0; --y)
+	auto texture = new Texture(width, height);
+	for (int y = 0; y < texture.height; y++)
 	{
-		for (int x = 0; x < width; x++)
+		for (int x = 0; x < texture.width; x++)
 		{
-			auto r = cast(double)x / (width - 1);
-			auto g = cast(double)y / (height - 1);
-			auto b = 0.25;
-
-			auto ir = cast(int)(r * 255.999);
-			auto ig = cast(int)(g * 255.999);
-			auto ib = cast(int)(b * 255.999);
-
-			file.writefln("%d %d %d", ir, ig, ib);
+			auto color = Color();
+			color.r = cast(float)x / (width - 1);
+			color.g = cast(float)y / (height - 1);
+			color.b = 0.25f;
+			texture[x, y] = color;
 		}
 	}
+	texture.saveToPpm("../out.ppm");
+
+	spawnShell("start ../out.ppm");
 }
