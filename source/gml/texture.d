@@ -18,13 +18,11 @@ public class Texture
         _pixels = new Color[width * height];
     }
 
-    @property
     public int width() pure const nothrow
     {
         return _width;
     }
 
-    @property
     public int height() pure const nothrow
     {
         return _height;

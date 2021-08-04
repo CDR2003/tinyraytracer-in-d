@@ -93,6 +93,16 @@ nothrow:
             }
         }
 
+        @nogc static Vector zero() pure nothrow
+        {
+            return Vector!(T, N)(0);
+        }
+
+        @nogc static Vector one() pure nothrow
+        {
+            return Vector!(T, N)(1);
+        }
+
         size_t toHash() const nothrow @safe
         {
             size_t hash = 0;
