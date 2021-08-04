@@ -5,8 +5,18 @@ import std.process;
 
 import gml;
 
-Color getBackgroundColor(const Ray ray)
+Color rayTrace(const Ray ray)
 {
+	auto sphere = new Sphere(0.5f);
+	sphere.position = Vector3(0, 0, 1);
+
+	auto hitResults = sphere.hit(ray);
+	if (hitResults.length > 0)
+	{
+		auto result = hitResults[0];
+		return (result.normal + Vector3.one) * 0.5f;
+	}
+
 	immutable auto direction = ray.direction.normalized;
 	immutable auto t = 0.5f * (direction.y + 1.0f);
 	return lerp(Color(1.0f, 1.0f, 1.0f), Color(0.5f, 0.7f, 1.0f), t);
@@ -28,7 +38,7 @@ void main()
 			immutable auto u = cast(float)x / texture.width;
 			immutable auto v = cast(float)y / texture.height;
 			immutable auto ray = viewport.getRay(u, v);
-			immutable auto color = getBackgroundColor(ray);
+			immutable auto color = rayTrace(ray);
 			texture[x, y] = color;
 		}
 	}

@@ -46,7 +46,7 @@ public class Viewport
     {
         immutable auto halfWidth = _width / 2;
         immutable auto halfHeight = _height / 2;
-        auto direction = Vector3(_origin.x, _origin.y, _origin.z + focalLength);
+        auto direction = Vector3(_origin.x, _origin.y, _origin.z + focalLength).normalized;
         auto offset = Vector3.zero;
         offset.x = lerp(-halfWidth, halfWidth, u);
         offset.y = lerp(halfHeight, -halfHeight, v);
