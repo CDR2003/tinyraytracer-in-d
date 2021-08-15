@@ -24,5 +24,5 @@ public abstract class SceneObject
         _position = position;
     }
 
-    public abstract Array!(HitResult) hit(const Ray ray) pure const;
+    public abstract HitResult[] hit(const Ray ray) pure const;
 }

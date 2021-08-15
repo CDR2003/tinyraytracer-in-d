@@ -13,7 +13,13 @@ public class Sphere : SceneObject
 
     public this(float radius)
     {
+        this(radius, Vector3.zero);
+    }
+
+    public this(float radius, const Vector3 position)
+    {
         _radius = radius;
+        this.position = position;
     }
 
     public float radius() pure const nothrow
@@ -21,7 +27,7 @@ public class Sphere : SceneObject
         return _radius;
     }
 
-    public override Array!(HitResult) hit(const Ray ray) pure const
+    public override HitResult[] hit(const Ray ray) pure const
     {
         immutable auto offset = ray.origin - this.position;
         immutable auto a = ray.direction.squaredMagnitude;
@@ -30,10 +36,10 @@ public class Sphere : SceneObject
         immutable auto delta = b * b - 4 * a * c;
         if (delta < 0)
         {
-            return Array!(HitResult)();
+            return [];
         }
 
-        Array!(HitResult) results;
+        HitResult[] results = [];
         immutable auto sqrtDelta = sqrt(delta);
         immutable auto root1 = (-b - sqrtDelta) / 2 / a;
         immutable auto root2 = (-b + sqrtDelta) / 2 / a;
@@ -45,11 +51,16 @@ public class Sphere : SceneObject
         return results;
     }
 
-    private void addResult(ref Array!(HitResult) results, const Ray ray, float distance) pure const
+    private void addResult(ref HitResult[] results, const Ray ray, float distance) pure const
     {
+        if (distance < 0)
+        {
+            return;
+        }
+
         immutable auto position = ray.origin + ray.direction * distance;
         immutable auto normal = (position - this.position).normalized;
         immutable auto result = HitResult(position, normal, distance);
-        results.insertBack(result);
+        results ~= result;
     }
 }

@@ -10,4 +10,5 @@ public
     import gml.texture;
     import gml.vector;
     import gml.viewport;
+    import gml.world;
 }
