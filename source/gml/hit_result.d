@@ -1,6 +1,6 @@
 module gml.hit_result;
 
-import gml.vector;
+import gml.math;
 
 public struct HitResult
 {

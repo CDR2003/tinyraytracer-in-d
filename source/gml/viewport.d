@@ -1,7 +1,5 @@
 module gml.viewport;
 
-import gml.vector;
-import gml.ray;
 import gml.math;
 
 public class Viewport

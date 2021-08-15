@@ -1,9 +1,8 @@
 module gml.scene_object;
 
 import std.container.array;
-import gml.vector;
+import gml.math;
 import gml.hit_result;
-import gml.ray;
 
 public abstract class SceneObject
 {

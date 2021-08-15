@@ -1,6 +1,7 @@
 module gml.texture;
 
-import gml.vector;
+import std.algorithm;
+import gml.math;
 import gml.ppm_writer;
 
 public class Texture

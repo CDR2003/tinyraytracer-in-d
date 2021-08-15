@@ -2,7 +2,7 @@ module gml.world;
 
 import gml.scene_object;
 import gml.hit_result;
-import gml.ray;
+import gml.math;
 
 public class World
 {

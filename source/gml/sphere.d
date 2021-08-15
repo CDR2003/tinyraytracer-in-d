@@ -2,8 +2,7 @@ module gml.sphere;
 
 import std.container.array;
 import std.math;
-import gml.vector;
-import gml.ray;
+import gml.math;
 import gml.scene_object;
 import gml.hit_result;
 
